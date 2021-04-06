@@ -4,6 +4,7 @@
 * move their ship with thrust
 * rotate their ship
 * shoot pellets from the nozzle of the ship
+
 The player will face asteroids of different sizes and speeds, and must do their best to either shoot the oncoming asteroids or dodge them.
   
   The background knowledge I have on this kind of project is developing 2D games in unity, such as flappy bird and Pac Man. The reason I want to do this project is because I want to make a 2D game that is interesting and fun to play. I will be motivated to complete such a game with as much refinement and detail as I can, so as to create a fun gameplay loop that someone can sink a lot of time into.
