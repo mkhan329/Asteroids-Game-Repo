@@ -1,4 +1,4 @@
-  # Fianl Project Proposal
+  # Asteroids Project Proposal
   
   My final project proposal is to create a remake of the classic game Asteroids. This would be a game where a player takes control of some ship, is able to move around a small space area, and must try to stay alive and get as high a score as possible. To do this, the player will be able to 
 * move their ship with thrust
