@@ -11,8 +11,9 @@ The player will face asteroids of different sizes and speeds, and must do their 
   
   A rought timeline of this project would involve breaking down the most important components to be completed over the 3 weeks. The first week would involve creating the basic movement of the ship and the asteroid objects, and making sure the ship can thrust and rotate. The second week would involve implementing the basic physics of the game, such as asteroid collisions, the ship getting hit by an asteroid, as well as implementing the shooting mechanic. The third week would oversee the gameplay loop, which would involve things such as the player score and increasing difficulty over time with bigger asteroids, as well as important details such as astroids getting shot and splitting into more rocks. 
   
-  If these goals are met earlier than expected, then I can also implement some extra features to spice up the gameplay. These could include power-ups from the asteroids such as *temporary invulnerability
-*higher firing power
-*extra health
+  If these goals are met earlier than expected, then I can also implement some extra features to spice up the gameplay. These could include power-ups from the asteroids such as 
+* temporary invulnerability
+* higher firing power
+* extra health
   
   I could also try implementing special asteroids. This could include homing asteroids which target the player ship, or explosive asteroids which will destroy asteroids in a certain radius.
