@@ -16,4 +16,5 @@ The player will face asteroids of different sizes and speeds, and must do their 
 * higher firing power
 * extra health
   
+  
   I could also try implementing special asteroids. This could include homing asteroids which target the player ship, or explosive asteroids which will destroy asteroids in a certain radius.
