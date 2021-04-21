@@ -2,6 +2,7 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "../include/SpaceArena.h"
 #ifndef FINAL_PROJECT_MKHAN329_SIMULATION_H
 #define FINAL_PROJECT_MKHAN329_SIMULATION_H
 #endif //FINAL_PROJECT_MKHAN329_SIMULATION_H
@@ -19,6 +20,7 @@ namespace asteroids {
         const int kWindowSizeY = 800;
 
     private:
+        SpaceArena arena_;
 
     };
 

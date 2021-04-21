@@ -10,10 +10,11 @@ namespace asteroids {
     void Simulation::draw() {
         ci::Color background_color("black");
         ci::gl::clear(background_color);
+        arena_.Display();
     }
 
     void Simulation::update() {
-
+        arena_.Update();
     }
 
 }
