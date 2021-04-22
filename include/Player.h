@@ -13,7 +13,7 @@ namespace asteroids {
         Player();
         void RenderPlayer();
         void UpdatePlayer();
-        glm::vec2 Rotate(glm::vec2& vector, float r);
+        glm::vec2 Rotate(glm::vec2& vector, float theta);
     private:
         glm::vec2 position_ = glm::vec2(400.0, 400.0);
         glm::vec2 velocity_ = glm::vec2(0.0, 0.0);

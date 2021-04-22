@@ -13,7 +13,8 @@ namespace asteroids {
     public:
         void Update();
         void Display();
-        void AddAsteroid(Asteroid a);
+        void AddAsteroid(Asteroid& a);
+        void RemoveAsteroid(size_t i);
     private:
         std::vector<Asteroid> asteroids_;
         Player player_ = Player();
