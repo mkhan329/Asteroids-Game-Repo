@@ -47,7 +47,7 @@ namespace asteroids {
                 velocity_ += acceleration_;
             }
         } else {
-            velocity_ *= 0.99;
+            velocity_ *= 0.995;
         }
 
         position_ += velocity_;
