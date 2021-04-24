@@ -39,4 +39,12 @@ namespace asteroids {
         return glm::vec2(x*cos(theta) - y*sin(theta), x*sin(theta) + y*cos(theta));
     }
 
+    glm::vec2 Asteroid::GetPosition() {
+        return position_;
+    }
+
+    int Asteroid::GetRadius() {
+        return radius_;
+    }
+
 }

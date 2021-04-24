@@ -28,4 +28,8 @@ namespace asteroids {
         ci::gl::color(ci::Color("red"));
         ci::gl::drawSolidCircle(position_, 2);
     }
+
+    glm::vec2 Projectile::GetPosition() {
+        return position_;
+    }
 }

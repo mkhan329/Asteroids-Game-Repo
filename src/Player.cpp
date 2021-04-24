@@ -69,16 +69,16 @@ namespace asteroids {
         if(position_.y < 0.0 && velocity_.y < 0.0) {
             position_.y = 800.0;
         }
-
-        for(Projectile& p: projectiles_) {
-            p.UpdateProjectile();
-        }
     }
 
     void Player::Shoot() {
         if(projectiles_.size() < 10) {
             projectiles_.push_back(Projectile (position_, 12.0f*direction_));
         }
+    }
+
+    void Player::RemoveProjectile(size_t i) {
+        projectiles_.erase(projectiles_.cbegin() + i);
     }
 
 }

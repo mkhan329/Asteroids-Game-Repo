@@ -13,6 +13,7 @@ namespace asteroids {
         Projectile(glm::vec2 position, glm::vec2 velocity);
         void UpdateProjectile();
         void RenderProjectile();
+        glm::vec2 GetPosition();
     private:
         glm::vec2 position_;
         glm::vec2 velocity_;

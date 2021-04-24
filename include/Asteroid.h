@@ -13,6 +13,8 @@ namespace asteroids {
         void RenderAsteroid();
         void UpdateAsteroid();
         glm::vec2 Rotate(glm::vec2& vector, float theta);
+        glm::vec2 GetPosition();
+        int GetRadius();
     private:
         ci::Color color_;
         size_t radius_;
