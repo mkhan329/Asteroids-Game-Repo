@@ -21,7 +21,7 @@ namespace asteroids {
             a.UpdateAsteroid();
             int j = 0;
             for(Projectile& p: player_.projectiles_) {
-                if(glm::length(p.GetPosition() - a.GetPosition()) < 20.0f+10.0f*a.GetRadius()) {
+                if(glm::length(p.GetPosition() - a.GetPosition()) <= 20.0f+10.0f*a.GetRadius()) {
                     deletion = true;
                     break;
                 }
@@ -34,9 +34,15 @@ namespace asteroids {
             i++;
         }
         if(deletion) {
+            Asteroid a = asteroids_.at(i);
+            if(a.GetRadius() > 0) {
+                for (int k = 0; k < 2; k++) {
+                    Asteroid b(ci::Color("gray"), a.GetRadius() - 1, Rotate(glm::vec2(4, 4), i + k), a.GetPosition());
+                    AddAsteroid(b);
+                }
+            }
             RemoveAsteroid(i);
         }
-        deletion = false;
     }
 
     void SpaceArena::AddAsteroid(Asteroid& a) {
@@ -45,6 +51,12 @@ namespace asteroids {
 
     void SpaceArena::RemoveAsteroid(size_t i) {
         asteroids_.erase(asteroids_.cbegin()+i);
+    }
+
+    glm::vec2 SpaceArena::Rotate(glm::vec2 vector, float theta) {
+        float x = vector.x;
+        float y = vector.y;
+        return glm::vec2(x*cos(theta) - y*sin(theta), x*sin(theta) + y*cos(theta));
     }
 
 }

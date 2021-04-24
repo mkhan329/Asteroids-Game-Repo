@@ -15,6 +15,7 @@ namespace asteroids {
         void Display();
         void AddAsteroid(Asteroid& a);
         void RemoveAsteroid(size_t i);
+        glm::vec2 Rotate(glm::vec2 vector, float theta);
         Player player_ = Player();
     private:
         std::vector<Asteroid> asteroids_;
