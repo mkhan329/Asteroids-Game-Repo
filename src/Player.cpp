@@ -20,9 +20,9 @@ namespace asteroids {
         if (GetKeyState(VK_UP)) {
             ci::gl::color(ci::Color("orange"));
         }
-        ci::gl::drawSolidTriangle(position_ + 50.0f * direction_,
-                                  position_ + 20.0f * Rotate(direction_, 2.1),
-                                  position_ + 20.0f * Rotate(direction_, -2.1));
+        ci::gl::drawSolidTriangle(position_ + 40.0f * direction_,
+                                  position_ + 16.0f * Rotate(direction_, 2.1),
+                                  position_ + 16.0f * Rotate(direction_, -2.1));
 
         for(Projectile& p: projectiles_) {
             p.RenderProjectile();
@@ -53,7 +53,7 @@ namespace asteroids {
             }
         }
 
-        velocity_ *= 0.995;
+        velocity_ *= 0.999;
         //velocity_ -= 0.10f*acceleration_;
         position_ += velocity_;
 

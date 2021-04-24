@@ -7,7 +7,7 @@ namespace asteroids {
     Simulation::Simulation() {
         ci::app::setWindowSize(kWindowSizeX, kWindowSizeY);
         for(int i = 0; i < 5; i++) {
-            Asteroid a(ci::Color("white"), 20+10*i, Rotate(glm::vec2(4, 4), i), glm::vec2(100+50*i, 100+50*i));
+            Asteroid a(ci::Color("gray"), i, Rotate(glm::vec2(4, 4), i), glm::vec2(600, 900));
             arena_.AddAsteroid(a);
         }
     }

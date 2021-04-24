@@ -26,6 +26,6 @@ namespace asteroids {
 
     void Projectile::RenderProjectile() {
         ci::gl::color(ci::Color("red"));
-        ci::gl::drawSolidCircle(position_, 3);
+        ci::gl::drawSolidCircle(position_, 2);
     }
 }

@@ -21,7 +21,7 @@ namespace asteroids {
         glm::vec2 position_ = glm::vec2(400.0, 400.0);
         glm::vec2 velocity_ = glm::vec2(0.0, 0.0);
         glm::vec2 direction_ = glm::vec2(1.0, 0.0);
-        glm::vec2 acceleration_ = glm::vec2(0.1, 0.0);
+        glm::vec2 acceleration_ = glm::vec2(0.15, 0.0);
 
         const float k_rotation_speed_ = 0.05;
 

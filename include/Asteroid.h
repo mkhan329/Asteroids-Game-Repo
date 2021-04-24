@@ -12,11 +12,13 @@ namespace asteroids {
         Asteroid(ci::Color color, size_t radius, glm::vec2 velocity, glm::vec2 position);
         void RenderAsteroid();
         void UpdateAsteroid();
+        glm::vec2 Rotate(glm::vec2& vector, float theta);
     private:
         ci::Color color_;
         size_t radius_;
         glm::vec2 velocity_;
         glm::vec2 position_;
+        glm::vec2 direction_ = glm::vec2(1.0, 0.0);
 
     };
 
