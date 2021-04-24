@@ -27,4 +27,12 @@ namespace asteroids {
         return glm::vec2(x*cos(theta) - y*sin(theta), x*sin(theta) + y*cos(theta));
     }
 
+    void Simulation::keyDown(ci::app::KeyEvent event) {
+        switch (event.getCode()) {
+            case ci::app::KeyEvent::KEY_SPACE:
+                arena_.player_.Shoot();
+                break;
+        }
+    }
+
 }

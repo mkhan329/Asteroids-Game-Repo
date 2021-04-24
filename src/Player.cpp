@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <math.h>
+#include <cinder/app/KeyEvent.h>
 #include "../include/Player.h"
 #include "cinder/gl/gl.h"
 namespace asteroids {
@@ -22,34 +23,38 @@ namespace asteroids {
         ci::gl::drawSolidTriangle(position_ + 50.0f * direction_,
                                   position_ + 20.0f * Rotate(direction_, 2.1),
                                   position_ + 20.0f * Rotate(direction_, -2.1));
+
+        for(Projectile& p: projectiles_) {
+            p.RenderProjectile();
+        }
     }
 
     void Player::UpdatePlayer() {
+        float r = glm::length(velocity_);
 
         if (GetKeyState(VK_RIGHT)) {
-            direction_ = Rotate(direction_, 0.05);
-            acceleration_ = Rotate(acceleration_, 0.05);
-            if(GetKeyState(VK_UP)) {
-                velocity_ = Rotate(velocity_, 0.05);
+            direction_ = Rotate(direction_, k_rotation_speed_);
+            acceleration_ = Rotate(acceleration_, k_rotation_speed_);
+            if(GetKeyState(VK_UP) && r > 1.0f) {
+                velocity_ = Rotate(velocity_, k_rotation_speed_);
             }
         }
         if (GetKeyState(VK_LEFT)) {
-            direction_ = Rotate(direction_, -0.05);
-            acceleration_ = Rotate(acceleration_, -0.05);
-            if(GetKeyState(VK_UP)) {
-                velocity_ = Rotate(velocity_, -0.05);
+            direction_ = Rotate(direction_, -k_rotation_speed_);
+            acceleration_ = Rotate(acceleration_, -k_rotation_speed_);
+            if(GetKeyState(VK_UP) && r > 1.0f) {
+                velocity_ = Rotate(velocity_, -k_rotation_speed_);
             }
         }
 
         if (GetKeyState(VK_UP)) {
-            float r = sqrt(velocity_.x*velocity_.x + velocity_.y*velocity_.y);
             if(r < 6.0f) {
                 velocity_ += acceleration_;
             }
-        } else {
-            velocity_ *= 0.995;
         }
 
+        velocity_ *= 0.995;
+        //velocity_ -= 0.10f*acceleration_;
         position_ += velocity_;
 
         if(position_.x > 1200.0 && velocity_.x > 0.0) {
@@ -64,5 +69,16 @@ namespace asteroids {
         if(position_.y < 0.0 && velocity_.y < 0.0) {
             position_.y = 800.0;
         }
+
+        for(Projectile& p: projectiles_) {
+            p.UpdateProjectile();
+        }
     }
+
+    void Player::Shoot() {
+        if(projectiles_.size() < 10) {
+            projectiles_.push_back(Projectile (position_, 12.0f*direction_));
+        }
+    }
+
 }

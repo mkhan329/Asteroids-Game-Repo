@@ -15,6 +15,7 @@ namespace asteroids {
 
         void draw() override;
         void update() override;
+        void keyDown(ci::app::KeyEvent event) override;
         glm::vec2 Rotate(glm::vec2 vector, float theta);
 
         const int kWindowSizeX = 1200;

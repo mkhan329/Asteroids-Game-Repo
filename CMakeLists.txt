@@ -43,7 +43,8 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 list(APPEND SOURCE_FILES    src/Asteroid.cpp
                             src/Player.cpp
                             src/Simulation.cpp
-                            src/SpaceArena.cpp)
+                            src/SpaceArena.cpp
+                            src/Projectile.cpp)
 
 list(APPEND TEST_FILES tests/asteroids_test_file.cpp)
 
