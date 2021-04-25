@@ -20,6 +20,7 @@ namespace asteroids {
 
         const int kWindowSizeX = 1200;
         const int kWindowSizeY = 800;
+        int frame = 0;
 
     private:
         SpaceArena arena_;

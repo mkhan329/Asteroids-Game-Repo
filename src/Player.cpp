@@ -20,29 +20,39 @@ namespace asteroids {
         if (GetKeyState(VK_UP)) {
             ci::gl::color(ci::Color("orange"));
         }
+
+        if(hit && i_frames_ < 10000000000000000000/2) {
+            ci::gl::color(ci::Color("black"));
+        }
+
         ci::gl::drawSolidTriangle(position_ + 40.0f * direction_,
                                   position_ + 16.0f * Rotate(direction_, 2.1),
                                   position_ + 16.0f * Rotate(direction_, -2.1));
 
+        if(i_frames_ = 10000000000000000000 - 1) {
+            hit = false;
+        }
         for(Projectile& p: projectiles_) {
             p.RenderProjectile();
         }
     }
 
     void Player::UpdatePlayer() {
+        i_frames_++;
+        i_frames_ %= 10000000000000000000;
         float r = glm::length(velocity_);
 
         if (GetKeyState(VK_RIGHT)) {
             direction_ = Rotate(direction_, k_rotation_speed_);
             acceleration_ = Rotate(acceleration_, k_rotation_speed_);
-            if(GetKeyState(VK_UP) && r > 1.0f) {
+            if(GetKeyState(VK_UP) && r > 0.5f) {
                 velocity_ = Rotate(velocity_, k_rotation_speed_);
             }
         }
         if (GetKeyState(VK_LEFT)) {
             direction_ = Rotate(direction_, -k_rotation_speed_);
             acceleration_ = Rotate(acceleration_, -k_rotation_speed_);
-            if(GetKeyState(VK_UP) && r > 1.0f) {
+            if(GetKeyState(VK_UP) && r > 0.5f) {
                 velocity_ = Rotate(velocity_, -k_rotation_speed_);
             }
         }
@@ -53,8 +63,7 @@ namespace asteroids {
             }
         }
 
-        velocity_ *= 0.999;
-        //velocity_ -= 0.10f*acceleration_;
+        velocity_ *= GetKeyState(VK_UP) ? 0.995 : 0.999;
         position_ += velocity_;
 
         if(position_.x > 1200.0 && velocity_.x > 0.0) {
@@ -79,6 +88,20 @@ namespace asteroids {
 
     void Player::RemoveProjectile(size_t i) {
         projectiles_.erase(projectiles_.cbegin() + i);
+    }
+
+    void Player::CheckCollision(Asteroid& a) {
+        glm::vec2 point1 = position_ + 40.0f * direction_;
+        glm::vec2 point2 = position_ + 16.0f * Rotate(direction_, 2.1);
+        glm::vec2 point3 = position_ + 16.0f * Rotate(direction_, -2.1);
+
+        if(glm::length(a.GetPosition() - point1) <= 20.0f+10.0f*a.GetRadius() ||
+                glm::length(a.GetPosition() - point2) <= 20.0f+10.0f*a.GetRadius() ||
+                glm::length(a.GetPosition() - point3) <= 20.0f+10.0f*a.GetRadius()) {
+            hit = true;
+
+        }
+
     }
 
 }

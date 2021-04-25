@@ -19,6 +19,7 @@ namespace asteroids {
         bool deletion = false;
         for(Asteroid& a: asteroids_) {
             a.UpdateAsteroid();
+            player_.CheckCollision(a);
             int j = 0;
             for(Projectile& p: player_.projectiles_) {
                 if(glm::length(p.GetPosition() - a.GetPosition()) <= 20.0f+10.0f*a.GetRadius()) {
