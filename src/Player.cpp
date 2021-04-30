@@ -21,25 +21,16 @@ namespace asteroids {
             ci::gl::color(ci::Color("orange"));
         }
 
-        if(hit && i_frames_ < 10000000000000000000/2) {
-            ci::gl::color(ci::Color("black"));
-        }
-
         ci::gl::drawSolidTriangle(position_ + 40.0f * direction_,
                                   position_ + 16.0f * Rotate(direction_, 2.1),
                                   position_ + 16.0f * Rotate(direction_, -2.1));
 
-        if(i_frames_ = 10000000000000000000 - 1) {
-            hit = false;
-        }
         for(Projectile& p: projectiles_) {
             p.RenderProjectile();
         }
     }
 
     void Player::UpdatePlayer() {
-        i_frames_++;
-        i_frames_ %= 10000000000000000000;
         float r = glm::length(velocity_);
 
         if (GetKeyState(VK_RIGHT)) {
@@ -90,7 +81,7 @@ namespace asteroids {
         projectiles_.erase(projectiles_.cbegin() + i);
     }
 
-    void Player::CheckCollision(Asteroid& a) {
+    bool Player::CheckCollision(Asteroid& a) {
         glm::vec2 point1 = position_ + 40.0f * direction_;
         glm::vec2 point2 = position_ + 16.0f * Rotate(direction_, 2.1);
         glm::vec2 point3 = position_ + 16.0f * Rotate(direction_, -2.1);
@@ -98,10 +89,13 @@ namespace asteroids {
         if(glm::length(a.GetPosition() - point1) <= 20.0f+10.0f*a.GetRadius() ||
                 glm::length(a.GetPosition() - point2) <= 20.0f+10.0f*a.GetRadius() ||
                 glm::length(a.GetPosition() - point3) <= 20.0f+10.0f*a.GetRadius()) {
-            hit = true;
-
+            position_ = glm::vec2(400.0, 400.0);
+            velocity_ = glm::vec2(0.0, 0.0);
+            direction_ = glm::vec2(1.0, 0.0);
+            acceleration_ = glm::vec2(0.15, 0.0);
+            return true;
         }
-
+        return false;
     }
 
 }
