@@ -19,6 +19,7 @@ namespace asteroids {
         Player player_ = Player();
     private:
         std::vector<Asteroid> asteroids_;
+        std::vector<Projectile> power_ups_;
         int score_ = 0;
         int lives_ = 3;
 

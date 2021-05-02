@@ -15,16 +15,24 @@ namespace asteroids {
         } else {
             ci::gl::drawStringCentered("GAME OVER", glm::vec2(575, 350),ci::Color("white"), ci::Font("Roboto", 100));
         }
+
+        ci::gl::color(ci::Color("red"));
+        for(int i = 0; i<player_.max_projectiles_ - player_.projectiles_.size(); i++) {
+            ci::gl::drawSolidCircle(glm::vec2(1120 - 30*i, 50), 2);
+        }
         for(Asteroid& a: asteroids_) {
             a.RenderAsteroid();
+        }
+        for(Projectile& p: power_ups_) {
+            p.RenderProjectile();
         }
     }
 
     void SpaceArena::Update() {
         if(asteroids_.empty()) {
-            lives_+=3;
+            lives_+=1;
             for(int i = 0; i < 5 + score_/1000; i++) {
-                Asteroid a(ci::Color("gray"), i % 5, Rotate(glm::vec2(4, 4), i % 5), glm::vec2(600, 900));
+                Asteroid a(ci::Color("gray"), i % 5, Rotate(glm::vec2(3, 3), i), glm::vec2(600, 900));
                 AddAsteroid(a);
             }
             score_ += 10;
@@ -59,6 +67,9 @@ namespace asteroids {
         if(deletion) {
             score_+=10;
             Asteroid a = asteroids_.at(i);
+            if(a.GetRadius() == 3) {
+                power_ups_.push_back(Projectile (a.GetPosition(), 0.0f*a.GetPosition(), 4, ci::Color("blue")));
+            }
             if(a.GetRadius() > 0) {
                 for (int k = 0; k < 2; k++) {
                     Asteroid b(ci::Color("gray"), a.GetRadius() - 1, Rotate(glm::vec2(4, 4), i + k), a.GetPosition());
@@ -66,6 +77,19 @@ namespace asteroids {
                 }
             }
             RemoveAsteroid(i);
+        }
+
+        i = 0;
+        deletion = false;
+        for(Projectile& p: power_ups_) {
+            if(player_.CheckCollision(p)) {
+                deletion = true;
+                break;
+            }
+            i++;
+        }
+        if(deletion) {
+            power_ups_.erase(power_ups_.cbegin() + i);
         }
     }
 

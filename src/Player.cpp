@@ -21,9 +21,9 @@ namespace asteroids {
             ci::gl::color(ci::Color("orange"));
         }
 
-        ci::gl::drawSolidTriangle(position_ + 40.0f * direction_,
-                                  position_ + 16.0f * Rotate(direction_, 2.1),
-                                  position_ + 16.0f * Rotate(direction_, -2.1));
+        ci::gl::drawSolidTriangle(position_ + 30.0f * direction_,
+                                  position_ + 12.0f * Rotate(direction_, 2.1),
+                                  position_ + 12.0f * Rotate(direction_, -2.1));
 
         for(Projectile& p: projectiles_) {
             p.RenderProjectile();
@@ -49,7 +49,7 @@ namespace asteroids {
         }
 
         if (GetKeyState(VK_UP)) {
-            if(r < 6.0f) {
+            if(r < 4.0f) {
                 velocity_ += acceleration_;
             }
         }
@@ -72,8 +72,8 @@ namespace asteroids {
     }
 
     void Player::Shoot() {
-        if(projectiles_.size() < 10) {
-            projectiles_.push_back(Projectile (position_, 12.0f*direction_));
+        if(projectiles_.size() < max_projectiles_) {
+            projectiles_.push_back(Projectile (position_, 12.0f*direction_, 2, ci::Color("red")));
         }
     }
 
@@ -82,9 +82,9 @@ namespace asteroids {
     }
 
     bool Player::CheckCollision(Asteroid& a) {
-        glm::vec2 point1 = position_ + 40.0f * direction_;
-        glm::vec2 point2 = position_ + 16.0f * Rotate(direction_, 2.1);
-        glm::vec2 point3 = position_ + 16.0f * Rotate(direction_, -2.1);
+        glm::vec2 point1 = position_ + 30.0f * direction_;
+        glm::vec2 point2 = position_ + 12.0f * Rotate(direction_, 2.1);
+        glm::vec2 point3 = position_ + 12.0f * Rotate(direction_, -2.1);
 
         if(glm::length(a.GetPosition() - point1) <= 20.0f+10.0f*a.GetRadius() ||
                 glm::length(a.GetPosition() - point2) <= 20.0f+10.0f*a.GetRadius() ||
@@ -93,6 +93,14 @@ namespace asteroids {
             velocity_ = glm::vec2(0.0, 0.0);
             direction_ = glm::vec2(1.0, 0.0);
             acceleration_ = glm::vec2(0.15, 0.0);
+            return true;
+        }
+        return false;
+    }
+
+    bool Player::CheckCollision(Projectile& p) {
+        if(glm::length(p.GetPosition() - position_) <= 16.0f) {
+            max_projectiles_++;
             return true;
         }
         return false;

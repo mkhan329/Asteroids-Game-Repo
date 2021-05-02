@@ -2,9 +2,11 @@
 #include "cinder/gl/gl.h"
 namespace asteroids {
 
-    Projectile::Projectile(glm::vec2 position, glm::vec2 velocity) {
+    Projectile::Projectile(glm::vec2 position, glm::vec2 velocity, int radius, ci::Color color) {
         position_ = position;
         velocity_ = velocity;
+        radius_ = radius;
+        color_ = color;
     }
 
     void Projectile::UpdateProjectile() {
@@ -25,8 +27,8 @@ namespace asteroids {
     }
 
     void Projectile::RenderProjectile() {
-        ci::gl::color(ci::Color("red"));
-        ci::gl::drawSolidCircle(position_, 2);
+        ci::gl::color(color_);
+        ci::gl::drawSolidCircle(position_, radius_);
     }
 
     glm::vec2 Projectile::GetPosition() {
