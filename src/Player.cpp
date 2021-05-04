@@ -72,8 +72,9 @@ namespace asteroids {
     }
 
     void Player::Shoot() {
-        if(projectiles_.size() < max_projectiles_) {
-            projectiles_.push_back(Projectile (position_, 12.0f*direction_, 2, ci::Color("red")));
+        projectiles_.push_back(Projectile (position_, 12.0f*direction_, 2, ci::Color("red")));
+        if(projectiles_.size() > max_projectiles_) {
+            projectiles_.erase(projectiles_.cbegin());
         }
     }
 
