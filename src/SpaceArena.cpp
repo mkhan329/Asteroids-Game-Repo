@@ -29,8 +29,11 @@ namespace asteroids {
     }
 
     void SpaceArena::Update() {
+        crash = -1;
+        power_up_ = false;
         if(asteroids_.empty()) {
             lives_+=1;
+            power_up_ = true;
             for(int i = 0; i < 5 + score_/1000; i++) {
                 Asteroid a(ci::Color("gray"), i % 5, Rotate(glm::vec2(3, 3), i), glm::vec2(600, 900));
                 AddAsteroid(a);
@@ -49,11 +52,13 @@ namespace asteroids {
             a.UpdateAsteroid();
             if(player_.CheckCollision(a)) {
                 lives_--;
+                crash = 0;
             }
             int j = 0;
             for(Projectile& p: player_.projectiles_) {
                 if(glm::length(p.GetPosition() - a.GetPosition()) <= 20.0f+10.0f*a.GetRadius()) {
                     deletion = true;
+                    crash = a.GetRadius() % 5;
                     break;
                 }
                 j++;
@@ -105,6 +110,22 @@ namespace asteroids {
         float x = vector.x;
         float y = vector.y;
         return glm::vec2(x*cos(theta) - y*sin(theta), x*sin(theta) + y*cos(theta));
+    }
+
+    int SpaceArena::SignalSound() {
+        if(crash >= 4) {
+            return 4;
+        }
+        if(crash >= 1) {
+            return 1;
+        }
+        if(crash >= 0) {
+            return 3;
+        }
+        if(power_up_) {
+            return 2;
+        }
+        return 0;
     }
 
 }

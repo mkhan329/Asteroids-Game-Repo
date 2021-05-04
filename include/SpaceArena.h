@@ -15,6 +15,7 @@ namespace asteroids {
         void Display();
         void AddAsteroid(Asteroid& a);
         void RemoveAsteroid(size_t i);
+        int SignalSound();
         glm::vec2 Rotate(glm::vec2 vector, float theta);
         Player player_ = Player();
     private:
@@ -22,6 +23,8 @@ namespace asteroids {
         std::vector<Projectile> power_ups_;
         int score_ = 0;
         int lives_ = 3;
+        int crash = -1;
+        bool power_up_ = false;
 
     };
 

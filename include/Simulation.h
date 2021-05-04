@@ -11,8 +11,9 @@ namespace asteroids {
 
     class Simulation : public ci::app::App  {
     public:
-        Simulation();
 
+        void setup() override;
+        Simulation();
         void draw() override;
         void update() override;
         void keyDown(ci::app::KeyEvent event) override;
@@ -20,7 +21,6 @@ namespace asteroids {
 
         const int kWindowSizeX = 1200;
         const int kWindowSizeY = 800;
-        int frame = 0;
 
     private:
         SpaceArena arena_;
