@@ -8,3 +8,4 @@ Controls for playing asteroids:
 * Up arrow to thrust
 * Spacebar to shoot
 
+![Alt Text](https://s8.gifyu.com/images/ezgif.com-gif-maker1da2cf95349c4728.gif)
